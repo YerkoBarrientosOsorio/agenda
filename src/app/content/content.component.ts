@@ -25,7 +25,9 @@ export class ContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.loadLocalStorage();
+    this.filteredContactList = this.contactList;
   }
 
   ngAfterViewInit(): void {
@@ -33,13 +35,22 @@ export class ContentComponent implements OnInit {
   }
 
   searchFilter(){
-    this.filteredContactList = this.contactList.filter(s => s.name.toLowerCase().includes(this.filter.toLowerCase()));
+    if(this.filter!=""){
+      this.filteredContactList = this.contactList.filter(s => s.name.toLowerCase().includes(this.filter.toLowerCase()));
+    }
+    else {
+      this.filteredContactList = this.contactList;
+    }
+    
   }
 
   loadLocalStorage(){
     const list = localStorage.getItem('Lista');
     console.log(list);
-    this.contactList = JSON.parse(list!);
+    if(localStorage.getItem('Lista')){
+      this.contactList = JSON.parse(list!);
+    }
+    
   }
 
   showDate(){
