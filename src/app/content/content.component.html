@@ -1,0 +1,96 @@
+<!-- LISTA -->
+<div *ngIf="show">
+<!-- <button (click)="loadLocalStorage()">Cargar</button> -->
+<button type="button" class="btn btn-light" style="float: right" (click)="openForms()">Agregar contacto +</button>
+
+<h2>Contactos</h2>
+<!-- <h2>{{this.count}}</h2> -->
+<div class="input-group mb-3">
+    <input type="text" class="form-control" [(ngModel)]="filter">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchFilter()">Buscar 🔎</button>
+</div>
+
+<ul class="list-group">
+    <li class="list-group-item" 
+    *ngFor="let item of filteredContactList; let i = index" style="font-size: x-large;"
+    >
+        
+        <!-- <div *ngIf="item.name.toLowerCase().includes(filter.toLowerCase())"> -->
+        {{item.name}}
+        
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example" style="float: right;">
+                <button type="button" class="btn btn-primary" (click)="editContact(i)">Editar</button>
+                <button type="button" class="btn btn-danger" (click)="removeContactFromList(i)">Eliminar</button>
+            </div>  
+        <!-- </div> -->
+
+    </li>
+</ul>
+<p *ngIf=!contactList[0] style="text-align: center">No hay contactos.</p>
+</div>
+
+
+
+
+<!-- CONTACTO -->
+<div *ngIf="!show">
+<h1>Contact</h1>
+
+<div class="mb-3">
+    <button type="button" class="btn btn-primary" (click)="backToList()">Volver ←</button>
+</div>
+
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Name</span>
+    <input type="text" class="form-control" [(ngModel)]="contact.name">
+</div>
+
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Phone</span>
+    <input type="text" class="form-control" [(ngModel)]="contact.phone">
+</div>
+
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Email</span>
+    <input type="text" class="form-control" placeholder="Username" [(ngModel)]="contact.email">
+</div>
+
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Address</span>
+    <input type="text" class="form-control" placeholder="Username" [(ngModel)]="contact.address">
+</div>
+
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">RUT</span>
+    <input type="text" class="form-control" placeholder="Username" [(ngModel)]="contact.rut">
+</div>
+
+<!-- <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Creation date</span>
+    <input type="text" class="form-control" placeholder="Username" [(ngModel)]="contact.creationDate">
+</div> -->
+
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">City</span>
+    <input type="text" class="form-control" placeholder="Username" [(ngModel)]="contact.city">
+</div>
+
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Birth date</span>
+    <!-- <input type="text" class="form-control" placeholder="Username" [(ngModel)]="contact.birthDate"> -->
+    <input type="date" class="form-control" placeholder="Username" [(ngModel)]="contact.birthDate">
+    <!-- <input class="form-control" matInput [matDatepicker]="picker" [(ngModel)]="dateFromInput">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <button type="button" class="btn btn-success" (click)="showDate();">Show date</button> -->
+</div>
+
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Commune</span>
+    <input type="text" class="form-control" placeholder="Username" [(ngModel)]="contact.commune">
+</div>
+
+<button *ngIf="!editing" type="button" class="btn btn-success" (click)="addContactToList(); showComponent()">Agregar</button>
+<button *ngIf="editing" type="button" class="btn btn-success" (click)="editContactFromList(); showComponent()">Guardar</button>
+</div>
